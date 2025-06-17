@@ -1,0 +1,41 @@
+@echo off
+setlocal
+
+:: Rutas necesarias
+set "TESSERACT_PATH=C:\Program Files\Tesseract-OCR"
+set "POPLER_PATH=C:\Apps\P\poppler-24.08.0\Library\bin"
+
+:: Mostrar título
+echo ======================================================
+echo Configurando variables de entorno para Tesseract y Poppler
+echo ======================================================
+echo.
+
+:: Agregar Tesseract si no está en PATH
+echo Verificando Tesseract...
+echo %PATH% | find /I "%TESSERACT_PATH%" >nul
+if errorlevel 1 (
+    echo Agregando ruta de Tesseract al PATH...
+    setx PATH "%PATH%;%TESSERACT_PATH%" /M
+) else (
+    echo Ruta de Tesseract ya está configurada.
+)
+
+:: Agregar Poppler si no está en PATH
+echo.
+echo Verificando Poppler...
+echo %PATH% | find /I "%POPLER_PATH%" >nul
+if errorlevel 1 (
+    echo Agregando ruta de Poppler al PATH...
+    setx PATH "%PATH%;%POPLER_PATH%" /M
+) else (
+    echo Ruta de Poppler ya está configurada.
+)
+
+echo.
+echo ✅ Configuración completada. Por favor:
+echo - Cierra esta ventana
+echo - Reinicia tu computadora o vuelve a iniciar sesión
+echo - Luego prueba en PowerShell: tesseract --version y pdftoppm -h
+pause
+endlocal

@@ -1,0 +1,119 @@
+✅ PASOS PARA INSTALAR POPPLER Y TESSERACT EN WINDOWS 11
+1. Instalar Poppler para Windows
+Poppler se usa para convertir archivos PDF a imágenes (convert_from_path).
+
+a) Descargar:
+Ve a https://github.com/oschwartz10612/poppler-windows/releases
+
+Descarga el archivo .zip más reciente de la sección Assets, por ejemplo: poppler-23.11.0-0.zip.
+
+b) Instalar:
+Extrae el contenido en una carpeta permanente, por ejemplo: C:\poppler.
+
+c) Agregar a Variables de Entorno:
+Abre el menú Inicio y busca "Variables de entorno".
+
+Da clic en "Editar las variables de entorno del sistema".
+
+En la ventana nueva, clic en "Variables de entorno".
+
+En "Variables del sistema", selecciona Path > clic en Editar.
+
+Agrega la ruta:
+
+makefile
+Copy
+Edit
+C:\poppler\Library\bin
+Acepta todo.
+
+2. Instalar Tesseract OCR
+pytesseract necesita el binario de Tesseract OCR para hacer reconocimiento de texto en imágenes.
+
+a) Descargar:
+Ve a https://github.com/UB-Mannheim/tesseract/wiki
+
+Descarga el instalador tesseract-ocr-w64-setup-5.x.x.exe.
+
+b) Instalar:
+Durante la instalación, marca el idioma español (spa).
+
+Instala en una carpeta permanente como:
+
+makefile
+Copy
+Edit
+C:\Program Files\Tesseract-OCR
+c) Agregar a Variables de Entorno:
+Repite los pasos para editar la variable Path.
+
+Agrega:
+
+makefile
+Copy
+Edit
+C:\Program Files\Tesseract-OCR
+✅ Verificación
+Abre una terminal (CMD o PowerShell) y ejecuta:
+
+bash
+Copy
+Edit
+tesseract --version
+y
+
+bash
+Copy
+Edit
+pdftoppm -h
+Si ambas comandos responden, todo está correctamente instalado.
+
+🛠️ Corrección adicional en tu código (por si fuera necesario)
+En tus scripts como main_mejorado.py y busqueda_documentos.py, asegúrate de tener en el entorno Python instalado lo siguiente:
+
+bash
+
+
+# lo siguiente dentro e la terminal de anaconda terminal cmd
+pip install pytesseract pdf2image python-docx PyPDF2 pandas
+
+
+Y para usar OCR en español, asegúrate de que exista el archivo:
+
+C:\Program Files\Tesseract-OCR\tessdata\spa.traineddata
+
+
+
+
+para spaCy y FTS5
+
+----- instalar en Anaconda Prompt - o el environment que estén usando
+pip install spacy pdf2image pytesseract python-docx
+python -m spacy download es_core_news_md
+
+------
+:: 1. Desinstala los paquetes que quedaron cruzados
+pip uninstall -y spacy thinc h5py numpy
+
+:: 2. Vuelve a la línea NumPy 1.x (la última estable es 1.26.4)
+pip install "numpy<2.0"
+
+:: 3. Reinstala spaCy y sus extras ya compatibles ------- el que sigue marca error pero bo importa
+pip install "spacy<3.8"           ^
+            --prefer-binary       ^
+            --upgrade --force-reinstall
+
+:: 4. Instala el resto de utilidades de OCR
+pip install pdf2image pytesseract python-docx
+:: 5. Descarga el modelo en español
+python -m spacy download es_core_news_md
+
+
+
+
+
+
+pip install spacy==3.7.2
+python -m spacy download es_core_news_md
+
+
